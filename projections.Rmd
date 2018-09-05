@@ -25,6 +25,7 @@ The **[projection](https://ofr1tz.shinyapps.io/projections/)** Shiny app...
 
 Feel free to explore and compare!
 
+
 Check out the [PROJ.4 documentation](https://proj4.org/operations/projections/index.html), if you want to know more about map projections.
 
 ## Map projections
@@ -65,6 +66,11 @@ g <- ggplot(world) +
     geom_sf(fill="black", colour="grey20") +
     theme_minimal()
 ```
+
+
+
+Here is the complete R code of the app (server.R and ui.R): 
+https://github.com/ofr1tz/projections
 
 ## Applying a projection
 
