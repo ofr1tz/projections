@@ -18,12 +18,14 @@ input$proj <- "merc"
 
 ## Explore map projections!
 
-The **projection** Shiny app...
+The **[projection](https://ofr1tz.shinyapps.io/projections/)** Shiny app...
 
 - lets you choose a projection by name.
 - projects a world map applying your selected projection.
 
 Feel free to explore and compare!
+
+Check out the [PROJ.4 documentation](https://proj4.org/operations/projections/index.html), if you want to know more about map projections.
 
 ## Map projections
 ```{r maps, fig.height=2}
@@ -54,7 +56,7 @@ plot_grid(
 
 Source: [Wikipedia](https://en.wikipedia.org/wiki/Map_projection)</font>
 
-## Some code
+## Building a world map
 
 Build a base world map with **ggplot2** and **rnaturalearth** packages:
 ```{r world, echo=TRUE}
@@ -64,15 +66,14 @@ g <- ggplot(world) +
     theme_minimal()
 ```
 
+## Applying a projection
+
 Apply a PROJ.4 CRS string (using the **glue** package) to the world map plot, based on user input:
 
-```{r project, echo = TRUE, eval=FALSE}
+```{r project, echo = TRUE}
 g + coord_sf(crs=glue("+proj={input$proj}"))
 ```
 
-## Now enjoy!
 
-Find the **projection** Shiny app [here](https://ofr1tz.shinyapps.io/projections/).
 
-Check out the [PROJ.4 documentation](https://proj4.org/operations/projections/index.html), if you want to know more about map projections.
 

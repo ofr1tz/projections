@@ -1,8 +1,9 @@
 library(tidyverse)
 library(glue)
 library(rnaturalearth)
+library(sf)
+library(rgeos)
 library(shiny)
-
 
 # construct world map
 world <- ne_countries(returnclass="sf")

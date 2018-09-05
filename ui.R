@@ -22,16 +22,16 @@ shinyUI(fluidPage(
                 "Eckert VI"="eck6",
                 "Equidistand Cylindrical"="eqc",
                 "Gall Stereographic"="gall",
-                "Geostationary Satellite View"="geos +h=35785831",
+                # "Geostationary Satellite View"="geos +h=35785831", # works locally but not on shinyapps.io
                 "Goode Homolosine"="goode",
                 "Lambert Azimuthal Equal Area"="laea",
                 "Mercator"="merc",
                 "Miller Cylindrical"="mill",
                 "Mollweide"="moll",
-                "Orthographic"="ortho",
+                # "Orthographic"="ortho", # works locally but not on shinyapps.io
                 "Robinson"="robin",
                 "Sinusoidal"="sinu",
-                "Transverse Mercator"="tmerc",
+                # "Transverse Mercator"="tmerc", # works locally but not on shinyapps.io
                 "van der Grinten"="vandg",
                 "Wagner I"="wag1",
                 "Wagner II"="wag2",
@@ -40,7 +40,7 @@ shinyUI(fluidPage(
                 "Wagner V"="wag5",
                 "Wagner VI"="wag6",
                 "Wagner VII"="wag7"),
-            selected="ortho"
+            selected="moll"
         )
     ),
     
