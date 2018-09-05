@@ -10,7 +10,10 @@ output: ioslides_presentation
 knitr::opts_chunk$set(echo = FALSE)
 require(tidyverse)
 require(cowplot)
+require(glue)
 require(rnaturalearth)
+input <- list()
+input$proj <- "merc"
 ```
 
 ## Explore map projections!
@@ -23,7 +26,7 @@ The **projection** Shiny app...
 Feel free to explore and compare!
 
 ## Map projections
-```{r proj, fig.height=2}
+```{r maps, fig.height=2}
 world <- ne_countries(returnclass="sf")
 g <- ggplot(world) +
     geom_sf(fill="grey", colour="grey") +
@@ -51,27 +54,25 @@ plot_grid(
 
 Source: [Wikipedia](https://en.wikipedia.org/wiki/Map_projection)</font>
 
-## Building a world map
+## Some code
 
-This code builds a base world map with **ggplot2** adnd **rnaturalearth** packages:
-```{r world}
+Build a base world map with **ggplot2** and **rnaturalearth** packages:
+```{r world, echo=TRUE}
 world <- ne_countries(returnclass="sf")
 g <- ggplot(world) +
     geom_sf(fill="black", colour="grey20") +
     theme_minimal()
 ```
 
-## Applying a projection
+Apply a PROJ.4 CRS string (using the **glue** package) to the world map plot, based on user input:
 
-This code applies a PROJ.4 CRS string (using the **glue** package) to the world map plot, based on user input.
-
-```{r cars, echo = FALSE}
+```{r project, echo = TRUE, eval=FALSE}
 g + coord_sf(crs=glue("+proj={input$proj}"))
 ```
 
 ## Now enjoy!
 
-Find the **projection** Shiny app [here]()
+Find the **projection** Shiny app [here](https://ofr1tz.shinyapps.io/projections/).
 
 Check out the [PROJ.4 documentation](https://proj4.org/operations/projections/index.html), if you want to know more about map projections.
 
