@@ -1,0 +1,77 @@
+---
+title: "A Distorted Planet"
+author: "Oliver Fritz"
+date: "September 5, 2018"
+output: ioslides_presentation
+
+---
+
+```{r setup, include=FALSE, warning=FALSE, message=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+require(tidyverse)
+require(cowplot)
+require(rnaturalearth)
+```
+
+## Explore map projections!
+
+The **projection** Shiny app...
+
+- lets you choose a projection by name.
+- projects a world map applying your selected projection.
+
+Feel free to explore and compare!
+
+## Map projections
+```{r proj, fig.height=2}
+world <- ne_countries(returnclass="sf")
+g <- ggplot(world) +
+    geom_sf(fill="grey", colour="grey") +
+    theme_minimal()+ 
+    theme(
+        axis.title=element_blank(),
+        axis.text=element_blank()
+    )
+merc <- g+coord_sf(crs="+proj=merc")
+moll <- g+coord_sf(crs="+proj=mill")
+eck1 <- g+coord_sf(crs="+proj=eck1")
+
+plot_grid(
+    merc, moll, eck1, 
+    labels=c("Mercator", "Mollweide", "Eckert I"),
+    label_colour="grey20",
+    label_size=12,
+    label_y=0.25,
+    hjust=-1.5,
+    align="h",
+    ncol=3)
+```
+
+<font size="4">"A map projection is a systematic transformation of the latitudes and longitudes of locations from the surface of a sphere or an ellipsoid into locations on a plane. Maps cannot be created without map projections. All map projections necessarily distort the surface in some fashion. Depending on the purpose of the map, some distortions are acceptable and others are not; therefore, different map projections exist in order to preserve some properties of the sphere-like body at the expense of other properties."
+
+Source: [Wikipedia](https://en.wikipedia.org/wiki/Map_projection)</font>
+
+## Building a world map
+
+This code builds a base world map with **ggplot2** adnd **rnaturalearth** packages:
+```{r world}
+world <- ne_countries(returnclass="sf")
+g <- ggplot(world) +
+    geom_sf(fill="black", colour="grey20") +
+    theme_minimal()
+```
+
+## Applying a projection
+
+This code applies a PROJ.4 CRS string (using the **glue** package) to the world map plot, based on user input.
+
+```{r cars, echo = FALSE}
+g + coord_sf(crs=glue("+proj={input$proj}"))
+```
+
+## Now enjoy!
+
+Find the **projection** Shiny app [here]()
+
+Check out the [PROJ.4 documentation](https://proj4.org/operations/projections/index.html), if you want to know more about map projections.
+
